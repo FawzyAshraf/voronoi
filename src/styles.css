@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+canvas {
+  border: solid 1px #666;
+  width: 800px;
+  height: 600px;
+  border-radius: 5px;
+}
