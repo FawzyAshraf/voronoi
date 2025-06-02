@@ -3,15 +3,56 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 #app {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   min-height: 100vh;
+  gap: 4px;
+  padding: 10px;
 }
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+#range-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#regenerate {
+  padding: 5px 10px;
+  background-color: #8c564b;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#regenerate:hover {
+  background-color: #8c564b95;
+}
+
 canvas {
   border: solid 1px #666;
-  width: 800px;
-  height: 600px;
+  min-width: 800px;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 1050px) {
+  #app {
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  canvas {
+    width: 80%;
+    min-width: unset;
+  }
 }
