@@ -18,6 +18,7 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  flex: 1;
 }
 
 #range-container {
@@ -26,7 +27,14 @@
   gap: 8px;
 }
 
-#regenerate {
+#distance-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.button {
   padding: 5px 10px;
   background-color: #8c564b;
   color: white;
@@ -35,8 +43,13 @@
   cursor: pointer;
 }
 
-#regenerate:hover {
+.button:hover {
   background-color: #8c564b95;
+}
+
+.button:disabled {
+	background-color: #8c564b50;
+	cursor: not-allowed;
 }
 
 canvas {
@@ -49,6 +62,10 @@ canvas {
   #app {
     justify-content: flex-start;
     flex-direction: column;
+  }
+
+  #controls {
+    flex: unset;
   }
 
   canvas {

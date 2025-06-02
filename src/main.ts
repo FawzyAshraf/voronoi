@@ -4,6 +4,18 @@ const pointsValue = document.querySelector("#points-value")!;
 const regenerateButton = document.querySelector(
   "#regenerate",
 ) as HTMLButtonElement;
+const regenerateSameSeedButton = document.querySelector(
+  "#regenerate-seed",
+) as HTMLButtonElement;
+const eucledianOption = document.querySelector(
+  "#eucledian",
+) as HTMLInputElement;
+const manhattanOption = document.querySelector(
+  "#manhattan",
+) as HTMLInputElement;
+const chebyshevOption = document.querySelector(
+  "#chebyshev",
+) as HTMLInputElement;
 
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
@@ -11,14 +23,39 @@ const canvasHeight = canvas.height;
 const ctx = canvas.getContext("2d")!;
 let pointsNumber = 8;
 
+type DistanceFunction = (p1: Point, p2: Point) => number;
+let distanceFunction: DistanceFunction = eucledianDistance;
+
 pointsInput.addEventListener("change", (e) => {
   const newValue = (e.target as HTMLInputElement).value;
   pointsValue.innerHTML = newValue;
   pointsNumber = Number(newValue);
 });
+eucledianOption.addEventListener("change", (e) => {
+  if ((e.target as HTMLInputElement).checked) {
+    distanceFunction = eucledianDistance;
+    regenerateSameSeedButton.disabled = false;
+  }
+});
+manhattanOption.addEventListener("change", (e) => {
+  if ((e.target as HTMLInputElement).checked) {
+    distanceFunction = manhattanDistance;
+    regenerateSameSeedButton.disabled = false;
+  }
+});
+chebyshevOption.addEventListener("change", (e) => {
+  if ((e.target as HTMLInputElement).checked) {
+    distanceFunction = chebyshevDistance;
+    regenerateSameSeedButton.disabled = false;
+  }
+});
 
-regenerateButton?.addEventListener("click", () => {
+regenerateButton.addEventListener("click", () => {
   generate();
+});
+
+regenerateSameSeedButton.addEventListener("click", () => {
+  generate(true);
 });
 
 const colors = [
@@ -66,19 +103,32 @@ function randomizePoints(count: number) {
   }));
 }
 
-function EucledianDistance(p1: Point, p2: Point) {
+function eucledianDistance(p1: Point, p2: Point) {
   return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
 }
 
-function generate() {
-  const points = randomizePoints(pointsNumber);
+function manhattanDistance(p1: Point, p2: Point) {
+  return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
+}
+
+function chebyshevDistance(p1: Point, p2: Point) {
+  return Math.max(Math.abs(p1.x - p2.x), Math.abs(p1.y - p2.y));
+}
+
+let points: Point[] = [];
+
+function generate(sameSeed = false) {
+  if (!sameSeed) {
+    points = randomizePoints(pointsNumber);
+    regenerateSameSeedButton.disabled = true;
+  }
   for (let i = 0; i <= canvasWidth; ++i) {
     for (let j = 0; j <= canvasHeight; ++j) {
       const p = { x: i, y: j };
       let m = Infinity,
         mi = 0;
       points.forEach((op, idx) => {
-        const d = EucledianDistance(p, op);
+        const d = distanceFunction(p, op);
         if (d < m) {
           m = d;
           mi = idx;

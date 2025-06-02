@@ -11,7 +11,7 @@
     <div id="app">
       <div id="controls">
         <div id="range-container">
-          <label for="points-range">Number of points</label>
+          <label for="points-range"><b>Number of points:</b></label>
           <input
             type="range"
             id="points-range"
@@ -22,7 +22,25 @@
           />
           <span id="points-value">8</span>
         </div>
-        <button type="button" id="regenerate">Generate</button>
+        <div id="distance-container">
+          <b>Distance Function:</b>
+          <div>
+            <input type="radio" name="distance" id="eucledian" checked />
+            <label for="eucledian">Eucledian</label>
+          </div>
+          <div>
+            <input type="radio" name="distance" id="manhattan" />
+            <label for="manhattan">Manhattan</label>
+          </div>
+          <div>
+            <input type="radio" name="distance" id="chebyshev" />
+            <label for="chebyshev">Chebyshev</label>
+          </div>
+        </div>
+        <button type="button" id="regenerate" class="button">Generate</button>
+        <button type="button" id="regenerate-seed" class="button" disabled>
+          Generate with same seed
+        </button>
       </div>
       <canvas width="800" height="600"></canvas>
     </div>
