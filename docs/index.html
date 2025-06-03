@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voronoi</title>
+    <script type="module" crossorigin src="/voronoi/assets/index-B5wtmJ3G.js"></script>
+    <link rel="stylesheet" crossorigin href="/voronoi/assets/index-MzmG0vHw.css">
+  </head>
+  <body>
+    <div id="app">
+      <div id="controls">
+        <div id="range-container">
+          <label for="points-range"><b>Number of points:</b></label>
+          <input
+            type="range"
+            id="points-range"
+            name="points-range"
+            min="1"
+            max="16"
+            value="8"
+          />
+          <span id="points-value">8</span>
+        </div>
+        <div id="distance-container">
+          <b>Distance Function:</b>
+          <div>
+            <input type="radio" name="distance" id="eucledian" checked />
+            <label for="eucledian">Eucledian</label>
+          </div>
+          <div>
+            <input type="radio" name="distance" id="manhattan" />
+            <label for="manhattan">Manhattan</label>
+          </div>
+          <div>
+            <input type="radio" name="distance" id="chebyshev" />
+            <label for="chebyshev">Chebyshev</label>
+          </div>
+        </div>
+        <button type="button" id="regenerate" class="button">Generate</button>
+        <button type="button" id="regenerate-seed" class="button" disabled>
+          Generate with same seed
+        </button>
+      </div>
+      <canvas width="800" height="600"></canvas>
+    </div>
+  </body>
+</html>
